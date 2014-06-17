@@ -1,0 +1,145 @@
+/* == Image gallery == */
+.image-gallery{
+	width: 88%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.image-gallery ul{
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+	width: 100%;
+}
+
+.image-gallery ul > li{
+	margin:20px;
+	width:100px;
+	text-align:center;
+	float:left;
+	border:4px solid gray;
+	box-shadow:0px 0px 3px;
+	position:relative;
+	cursor: pointer;
+	display: block;
+	overflow: hidden;
+}
+
+.image-gallery ul > li.selectable:hover::after, .image-gallery ul > li.selected::after{
+	content: "";
+	width: 43px;
+	height: 30px;
+	background: url('../../img/checked-checker.png') no-repeat;
+	overflow: hidden;
+	position: absolute;
+	left: 50%;
+	margin-left: -26px;
+	margin-top: -15px;
+	top: 50%;
+	opacity: 1;
+	z-index: 99;
+	background-position: 0px -52px;
+	-webkit-transition:all 0.5 ease;
+	transition:all 0.5 ease;
+}
+
+ .image-gallery ul > li.selected::after{
+ 	background-position: 0px -13px !important;
+ }
+
+.image-gallery ul > li.selectable:hover::before, .image-gallery ul > li.selected::before {
+    width: 100%;
+    height: 100%;
+    background-color: wheat;
+    z-index: 9;
+    position: absolute;
+    content: "";
+    left: 0px;
+    opacity: 0.5;
+    color: white;
+    font-size: 15px;
+    line-height: 94px;
+    -webkit-transition:all 0.5 ease;
+	transition:all 0.5 ease;
+}
+.image-gallery div.sg-buttons{
+	clear: both;
+	margin-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	height: 30px;
+}
+.image-gallery .sg-buttons div.sg-check-button{
+	clear: both;
+	width: auto;
+	float: left;
+	padding: 10px;
+	background: #eaeaea;
+	border-radius: 10px;
+	border: 1px solid #e1e1e1;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-shadow: 0px 0px 3px white;
+	cursor: pointer;
+}
+
+.image-gallery div.sg-check-button:active, .image-gallery div.sg-check-button.selected, .image-gallery .sg-buttons div.sg-check-all.selected,.image-gallery .sg-buttons div.sg-check-all:active, .image-gallery .sg-buttons div.sg-delete:active{
+	box-shadow: 0px 0px 5px black inset;
+}
+
+.image-gallery .sg-buttons div.sg-check-all, .image-gallery .sg-buttons div.sg-delete{
+    padding: 6px;
+    background: #0055CC;
+    float: left;
+    margin-left: 15px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+.image-gallery .sg-buttons div.sg-delete{
+	background-color: red;
+}
+.image-gallery .sg-buttons div.sg-hidden-btn{
+	display: none;
+}
+
+.image-gallery #sg-status{
+	padding: 10px;
+	margin: 15px;
+	background: #eaeaea;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 3px;
+	text-indent: 11px;;
+}
+
+body .sg-overlayer .sg-overlayer-container{
+    left: 50%;
+    position: absolute;
+    top:50%;
+    max-width: 100%;
+    max-height: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 17px black;
+    padding: 10px;
+}
+body.sg-opened{
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+html.sg-opened{
+    overflow-x: hidden;
+    overflow-y: hidden;;
+}
+body .sg-overlayer{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: url('../../img/ov-bg.png');
+	top: 0;
+	left: 0;
+	z-index: 5;
+	display: none;
+}
+body .sg-overlayer.show{
+	display: block;
+}
