@@ -15,11 +15,13 @@
 
 
         var App = {
+            checker: $('<div class="sg-hidden-btn sg-check-all">Check all</div>'),
             selectable: function(arg){
                 if(arg.hasClass('selected')){  
                     gallery.find('.sg-hidden-btn').fadeOut('slow');    
                         li.removeClass('selectable ' + def.selectedClass).addClass('item');
                 }else{
+                    this.checkUnchecked();
                     gallery.find('.sg-hidden-btn').fadeIn('slow');
                         gallery.find('li').toggleClass( "selectable" ).removeClass('item');   
                 }  
@@ -40,18 +42,21 @@
                 }
             },
 
-            check: function(chkr){
-               chkr.toggleClass( def.selectedClass );
+            check: function(){
+               this.checker.toggleClass( def.selectedClass );
+               return !gallery.hasClass('all-selected') ? this.checkChecked() : this.checkUnchecked();
+            },
 
-               if(!gallery.hasClass('all-selected')){
-                  gallery.addClass('all-selected'); 
+            checkChecked: function(){
+                gallery.addClass('all-selected'); 
                     li.addClass(def.selectedClass); 
-                        chkr.html('Uncheck all');
-               }else{
-                  gallery.removeClass('all-selected'); 
+                        this.checker.html('Uncheck all');
+            },
+
+            checkUnchecked: function(){
+                gallery.removeClass('all-selected'); 
                     li.removeClass(def.selectedClass);
-                        chkr.html('Check all');
-               } 
+                        this.checker.html('Check all');
             },
 
             //update
@@ -116,7 +121,7 @@
                     //Add buttons
                     gallery.find('.sg-buttons')
                         .append('<div class="'+def.btnClass+'">Checkable</div>')
-                        .append('<div class="sg-hidden-btn sg-check-all">Check all</div>')
+                        .append(this.checker)
                         .append('<div class="sg-hidden-btn sg-delete">Delete</div>');     
 
                     //Append overlayer
@@ -152,8 +157,8 @@
                     })
 
                     //Check all
-                    $('.sg-check-all').click(function(){
-                        App.check($(this));
+                    this.checker.click(function(){
+                        App.check();
                     });  
 
                     //Delete 
